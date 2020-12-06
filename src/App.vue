@@ -19,9 +19,9 @@
 
       <p>
         Take regular breaks using the “20-20-20” rule: every 20 minutes, shift your eyes to look at an
-        object at least 20 feet (≈ 6 meters) away, for at least 20 seconds.
+        object at least 20 feet (≈ 6 metres) away, for at least 20 seconds.
         This rule is recommended by the American Academy of Ophthalmology, the UK National Health Service,
-        The Canadian Association of Optometrists and many other health institutions.
+        the Canadian Association of Optometrists and many other health institutions.
       </p>
     </div>
 
@@ -39,8 +39,12 @@
         or for
         <a href="https://support.mozilla.org/en-US/kb/push-notifications-firefox" target="_blank">Mozilla Firefox here</a>.
       </p>
+
     </div>
   </div>
+  <p>Built by <a href="https://ivovalchev.com">Ivo Valchev</a>, under <a href="https://github.com/I-Valchev/20-20-20">
+    Open Source</a> MIT license.
+  </p>
 </template>
 
 <script>
