@@ -19,8 +19,8 @@
             const state = reactive({
                 milliseconds: props.milliseconds,
                 formattedTime: computed(() =>  {
-                    const duration = Duration.fromMillis(state.milliseconds).shiftTo('minutes', 'seconds');
-                    return duration.minutes + ":" + duration.seconds;
+                    const duration = Duration.fromMillis(state.milliseconds);
+                    return duration.toFormat('mm:ss');
                 })
             });
 
@@ -39,6 +39,10 @@
             };
 
             const start = () => {
+                if (state.milliseconds === 0) {
+                    return;
+                }
+
                 state.interval = window.setInterval(() => {
                     state.milliseconds -= step;
                     if (state.milliseconds <= 0) {

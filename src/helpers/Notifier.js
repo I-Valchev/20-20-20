@@ -15,5 +15,9 @@ export default {
                 timeout: Duration.fromObject({seconds: 10}).shiftTo('milliseconds'),
             });
         }
+    },
+
+    init() {
+        Push.Permission.request(()=>{},()=>{});
     }
 }
