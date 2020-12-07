@@ -3,10 +3,26 @@
     <p>Take regular 20-second breaks, every 20 minutes.</p>
     <Countdown :milliseconds=state.milliseconds @completed="this.handleCompleted"  />
 
+
     <div>
       <button @click="this.handleStop">{{ state.state === State.STOPPED ? 'Restart' : 'Stop' }}</button>
       <button @click="this.handleSilence" class="secondary">Silence for 1 hour</button>
+      <div style="margin-left: 1rem;">
+        <Checkbox
+                :value=state.settings.isSet(state.settings.SOUND)
+                name="Sound notifications"
+                @change=state.settings.flip(state.settings.SOUND)
+        ></Checkbox>
+
+        <Checkbox
+                :value=state.settings.isSet(state.settings.NOTIFICATION)
+                name="Pop-up notifications"
+                @change=state.settings.flip(state.settings.NOTIFICATION)
+        ></Checkbox>
+      </div>
     </div>
+
+
   </div>
 
   <div id="content">
@@ -50,19 +66,24 @@
 <script>
 import { reactive, computed, onMounted } from 'vue'
 import Countdown from './components/Countdown'
+import Checkbox from './components/Checkbox'
 import Notifier from './helpers/Notifier';
 import State from './helpers/State';
+import Settings from './helpers/Settings';
 import { Duration } from 'luxon';
 
 export default {
   name: 'App',
   components: {
     Countdown,
+    Checkbox,
   },
   setup() {
+    Settings.set(Settings.NOTIFICATION);
 
     const state = reactive({
       state: State.COUNTING,
+      settings: Settings,
       milliseconds: computed(() => {
         if(state.state === State.COUNTING) {
           return Duration.fromObject({minutes: 20}).shiftTo('milliseconds').milliseconds;
@@ -91,7 +112,7 @@ export default {
         state.state = State.COUNTING;
       }
 
-      Notifier.notify(state.state);
+      Notifier.notify(state.state, state.settings);
     };
 
     const handleStop = () => {
