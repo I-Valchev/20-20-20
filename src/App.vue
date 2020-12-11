@@ -1,8 +1,7 @@
 <template>
   <div class="container">
     <p>Take regular 20-second breaks, every 20 minutes.</p>
-    <Countdown :milliseconds=state.milliseconds @completed="this.handleCompleted"  />
-
+    <Countdown :milliseconds=state.milliseconds @completed="this.handleCompleted" @counted="this.handleCounted"  />
 
     <div>
       <button @click="this.handleStop">{{ state.state === State.STOPPED ? 'Restart' : 'Stop' }}</button>
@@ -21,7 +20,6 @@
         ></Checkbox>
       </div>
     </div>
-
 
   </div>
 
@@ -127,7 +125,15 @@ export default {
       state.state = State.SILENCED;
     };
 
-    return {state, handleCompleted, handleStop, handleSilence, State};
+    const handleCounted = (formattedTime) => {
+      updateTitle(formattedTime)
+    };
+
+    const updateTitle = (formattedTime) => {
+      document.title = formattedTime + " | " + document.title.split(' | ')[1];
+    };
+
+    return {state, handleCompleted, handleStop, handleSilence, handleCounted, State};
   }
 }
 </script>

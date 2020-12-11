@@ -45,6 +45,7 @@
 
                 state.interval = window.setInterval(() => {
                     state.milliseconds -= step;
+                    emit('counted', state.formattedTime)
                     if (state.milliseconds <= 0) {
                         complete();
                     }
