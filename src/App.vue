@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <p>Take regular 20-second breaks, every 20 minutes.</p>
-    <Countdown :milliseconds=state.milliseconds @completed="this.handleCompleted" @counted="this.handleCounted"  />
+    <Countdown :key="state.key" :milliseconds=state.milliseconds @completed="this.handleCompleted" @counted="this.handleCounted"  />
 
     <div>
       <button @click="this.handleStop">{{ state.state === State.STOPPED ? 'Restart' : 'Stop' }}</button>
@@ -82,6 +82,7 @@ export default {
     const state = reactive({
       state: State.COUNTING,
       settings: Settings,
+      key: '',
       milliseconds: computed(() => {
         if(state.state === State.COUNTING) {
           return Duration.fromObject({minutes: 20}).shiftTo('milliseconds').milliseconds;
@@ -123,6 +124,7 @@ export default {
 
     const handleSilence = () => {
       state.state = State.SILENCED;
+      resetCounter();
     };
 
     const handleCounted = (formattedTime) => {
@@ -131,6 +133,12 @@ export default {
 
     const updateTitle = (formattedTime) => {
       document.title = formattedTime + " | " + document.title.split(' | ')[1];
+    };
+
+    const resetCounter = () => {
+      // This way we can reset the counter.
+      // Used for clicking Silence for 1 hour.
+      state.key = Math.random();
     };
 
     return {state, handleCompleted, handleStop, handleSilence, handleCounted, State};
