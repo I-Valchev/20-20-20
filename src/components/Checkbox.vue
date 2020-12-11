@@ -1,7 +1,7 @@
 <template>
     <div class="input">
         <input :name="name" type="checkbox" :checked="value === true ? 'checked' : false ">
-        <label :for="name">{{ name }}</label>
+        <label :for="name" @click="emit('change')">{{ name }}</label>
     </div>
 </template>
 
