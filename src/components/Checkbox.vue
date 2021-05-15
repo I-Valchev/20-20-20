@@ -1,6 +1,6 @@
 <template>
     <div class="input">
-        <input :name="name" type="checkbox" :checked="value === true ? 'checked' : false ">
+        <input :id="name" :name="name" type="checkbox" :checked="value === true ? 'checked' : false ">
         <label :for="name" @click="emit('change')">{{ name }}</label>
     </div>
 </template>

@@ -49,9 +49,9 @@
 
       <p>
         To do so, you need to allow the app to send you notifications. You can check your notifications settings
-        for <a href="https://support.google.com/chrome/answer/3220216" target="_blank">Google Chrome here</a>,
+        for <a href="https://support.google.com/chrome/answer/3220216" target="_blank" rel="noopener">Google Chrome here</a>,
         or for
-        <a href="https://support.mozilla.org/en-US/kb/push-notifications-firefox" target="_blank">Mozilla Firefox here</a>.
+        <a href="https://support.mozilla.org/en-US/kb/push-notifications-firefox" target="_blank" rel="noopener">Mozilla Firefox here</a>.
       </p>
 
     </div>
